@@ -1,6 +1,4 @@
 class PostsController < ApplicationController
-
-
   # before_action :find_post, only: %i[show edit update destroy]
 
   # def index
@@ -59,9 +57,6 @@ class PostsController < ApplicationController
   # params.require(:post).permit(:title, :body)
 
   # end
-
-
-
   def index
     @posts = Post.all
   end
@@ -84,10 +79,11 @@ class PostsController < ApplicationController
     end
   end
 
-  def edit; end
-
   def update; end
 
   def destroy; end
+
+  def edit
+  end
 
 end
