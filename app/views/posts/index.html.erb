@@ -1,0 +1,23 @@
+<%
+=begin%>
+ <% @posts.each do |post| %>
+  <h2><%= post.title %></h2>
+  <div><%= truncate(post.body, :length=> 35)%></div>
+  <%= link_to "Read it", post %>
+  <br>
+
+<%end%>
+<%
+=end%>
+<h1> out blog</h1>
+<% @posts.each do |post| %>
+
+<h2><%= link_to post.title, post %></h2>
+
+<p><%= post.body%></p>
+<hr/>
+<%end%>
+
+
+<p><%= link_to "add new", new_post_path %></p>
+
