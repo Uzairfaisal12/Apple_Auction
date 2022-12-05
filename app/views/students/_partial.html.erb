@@ -1,7 +1,7 @@
 <%= form_for @student do |f| %>
 
   <%if @student.errors.any?%>
-    <h2><%=pluralize(@student.errors.count, "error")%>  prohibited this from being save:</h2>
+    <h2><%=pluralize(@student.errors.count, "error")%>  Some are generating:</h2>
     <ul>
       <%@student.errors.full_messages.each do |message|%>
         <li><%= message%></li>
