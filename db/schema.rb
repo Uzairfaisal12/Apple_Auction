@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_11_25_123057) do
+ActiveRecord::Schema[7.0].define(version: 2022_12_06_113746) do
   create_table "associates", force: :cascade do |t|
     t.string "title"
     t.text "content"
@@ -29,13 +29,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_25_123057) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "callbacks", force: :cascade do |t|
-    t.string "title"
-    t.string "value"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "calls", force: :cascade do |t|
     t.string "title"
     t.integer "name"
@@ -45,6 +38,47 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_25_123057) do
     t.string "email"
   end
 
+  create_table "courses", force: :cascade do |t|
+    t.string "name"
+    t.string "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "demos", force: :cascade do |t|
+    t.string "title"
+    t.text "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "student_id"
+    t.index ["student_id"], name: "index_demos_on_student_id"
+  end
+
+  create_table "departments", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "manager_histories", force: :cascade do |t|
+    t.date "joining_date"
+    t.string "experience"
+    t.integer "manager_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["manager_id"], name: "index_manager_histories_on_manager_id"
+  end
+
+  create_table "managers", force: :cascade do |t|
+    t.string "name"
+    t.string "email"
+    t.string "contact"
+    t.integer "department_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["department_id"], name: "index_managers_on_department_id"
+  end
+
   create_table "posts", force: :cascade do |t|
     t.string "title"
     t.text "body"
@@ -52,8 +86,14 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_25_123057) do
     t.datetime "updated_at", null: false
     t.string "number"
     t.string "name"
-    t.string "dateofbirth"
     t.decimal "price", precision: 5, scale: 2
+  end
+
+  create_table "projects", force: :cascade do |t|
+    t.string "name"
+    t.text "descrption"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "students", force: :cascade do |t|
@@ -63,5 +103,16 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_25_123057) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "sub_demos", force: :cascade do |t|
+    t.string "title"
+    t.integer "demo_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["demo_id"], name: "index_sub_demos_on_demo_id"
+  end
+
   add_foreign_key "associates", "Calls"
+  add_foreign_key "manager_histories", "managers"
+  add_foreign_key "managers", "departments"
+  add_foreign_key "sub_demos", "demos"
 end
