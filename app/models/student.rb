@@ -1,8 +1,6 @@
 class Student < ApplicationRecord
   has_many :demos
-  validates :name, :number, :presence => true
-  validates :name, :length => { :minimum =>5}
-  validates :name, :number, :uniqueness => true
-
-#
+  has_and_belongs_to_many :courses
+  has_many :student_projects
+  has_many :projects, through: :student_projects
 end
